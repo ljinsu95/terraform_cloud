@@ -11,7 +11,7 @@ provider "aws" {
 ##########################
 ## VPC
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
-resource "aws_vpc" "fdo" {
+resource "aws_vpc" "main" {
   cidr_block = var.aws_vpc_cidr
 
   instance_tenancy     = "default"
@@ -28,7 +28,7 @@ resource "aws_subnet" "main" {
   # count = length(var.map_subnet_az[var.aws_region]) # 지정한 AZ 수 만큼 Subnet 생성
   count = length(lookup(var.map_subnet_az, var.aws_region)) # 지정한 AZ 수 만큼 Subnet 생성
 
-  vpc_id = aws_vpc.fdo.id
+  vpc_id = aws_vpc.main.id
 
   availability_zone = var.map_subnet_az[var.aws_region][count.index].availability_zone
   # cidr_block        = var.map_subnet_az[var.aws_region][count.index].cidr_block
@@ -43,7 +43,7 @@ resource "aws_subnet" "main" {
 
 ## Internet Gateway
 resource "aws_internet_gateway" "main" {
-  vpc_id = aws_vpc.fdo.id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "${var.prefix}_igw"
@@ -54,7 +54,7 @@ resource "aws_internet_gateway" "main" {
 ## Route Table
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 resource "aws_route_table" "fdo" {
-  vpc_id = aws_vpc.fdo.id
+  vpc_id = aws_vpc.main.id
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
@@ -77,7 +77,7 @@ resource "aws_route_table_association" "rtb_sn" {
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 resource "aws_security_group" "all" {
   name   = "${var.prefix}-All-allowed"
-  vpc_id = aws_vpc.fdo.id
+  vpc_id = aws_vpc.main.id
 
   ingress {
     from_port   = 0
@@ -101,7 +101,7 @@ resource "aws_security_group" "all" {
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl
 ## Network ACL
 resource "aws_network_acl" "fdo" {
-  vpc_id = aws_vpc.fdo.id
+  vpc_id = aws_vpc.main.id
 
   egress {
     protocol   = "all"

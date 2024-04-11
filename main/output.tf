@@ -3,6 +3,11 @@ data "aws_availability_zones" "available" {
     
 }
 
-output "name" {
+output "az_name_list" {
   value = data.aws_availability_zones.available.names
+}
+
+output "vpc_id" {
+  value = aws_vpc.main.id
+  description = "main vpc id"
 }
