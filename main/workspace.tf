@@ -16,6 +16,6 @@ resource "tfe_workspace_run" "vault_destroy" {
 }
 
 resource "tfe_run_trigger" "name" {
-  workspace_id = tfe_workspace.vault.id
-  sourceable_id = data.tfe_workspace.main.id
+  sourceable_id = tfe_workspace.vault.id
+  workspace_id = data.tfe_workspace.main.id
 }
