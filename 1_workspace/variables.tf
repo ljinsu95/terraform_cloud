@@ -21,7 +21,19 @@ variable "tfc_project_name" {
 }
 
 variable "GITHUB_API_TOKEN" {
-  type = string
+  type        = string
   description = "GITHUB API TOKEN"
-  sensitive = true
+  sensitive   = true
+}
+
+variable "workspace_names" {
+  type        = list(string)
+  default     = ["vpc", "ec2_vault"]
+  description = "workspace(=directory) 명 목록"
+}
+
+variable "github_repo_path" {
+  type        = string
+  default     = "ljinsu95/terraform_cloud"
+  description = "GITHUB REPO 주소"
 }
