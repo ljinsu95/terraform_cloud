@@ -1,3 +1,4 @@
+## 워크스페이스 생성
 ### https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "vault" {
   name = "vault-ec2-server"
@@ -25,6 +26,7 @@ resource "tfe_workspace" "tfc_poc_workspace" {
   assessments_enabled   = true
 }
 
+## 생성된 워크스페이스 데이터 소스 조회
 data "tfe_workspace" "tfc_poc_workspace" {
   for_each = toset(var.workspace_names)
 
@@ -33,6 +35,7 @@ data "tfe_workspace" "tfc_poc_workspace" {
   depends_on   = [tfe_workspace.tfc_poc_workspace]
 }
 
+## 모든 워크스페이스 remote 실행 모드 설정
 resource "tfe_workspace_settings" "tfc_poc_workspace_settings" {
   for_each = toset(var.workspace_names)
 

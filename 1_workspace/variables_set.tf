@@ -18,6 +18,14 @@ resource "tfe_variable" "tfc_poc_1_1_workspace_name" {
   variable_set_id = tfe_variable_set.org_variable_set.id
 }
 
+resource "tfe_variable" "TFC_TOKEN" {
+  key             = "TFC_TOKEN"
+  value           = var.TFC_TOKEN  # 개인 TFC_TOKEN
+  sensitive       = true
+  category        = "terraform"
+  variable_set_id = tfe_variable_set.org_variable_set.id
+}
+
 resource "tfe_variable" "aws_access_key" {
   key             = "AWS_ACCESS_KEY_ID"
   value           = ""  # 개인 AWS Access Key 입력
@@ -29,6 +37,14 @@ resource "tfe_variable" "aws_access_key" {
 resource "tfe_variable" "aws_secret_key" {
   key             = "AWS_SECRET_ACCESS_KEY"
   value           = "" # 개인 AWS Secret Key 입력
+  sensitive       = false
+  category        = "terraform"
+  variable_set_id = tfe_variable_set.org_variable_set.id
+}
+
+resource "tfe_variable" "vault_license" {
+  key             = "VAULT_LICENSE"
+  value           = "" # VAULT_LICENSE 입력
   sensitive       = true
   category        = "terraform"
   variable_set_id = tfe_variable_set.org_variable_set.id
