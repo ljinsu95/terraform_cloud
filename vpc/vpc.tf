@@ -95,6 +95,45 @@ resource "aws_security_group" "all" {
 resource "aws_network_acl" "fdo" {
   vpc_id = aws_vpc.main.id
 
+  
+  # Vault reporting ip deny start
+  egress {
+    protocol   = "tcp"
+    rule_no    = 80
+    action     = "deny"
+    cidr_block = "100.20.70.12/32"
+    from_port  = 443
+    to_port    = 443
+  }
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 81
+    action     = "deny"
+    cidr_block = "35.166.5.222/32"
+    from_port  = 443
+    to_port    = 443
+  }
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 82
+    action     = "deny"
+    cidr_block = "23.95.85.111/32"
+    from_port  = 443
+    to_port    = 443
+  }
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 83
+    action     = "deny"
+    cidr_block = "44.215.244.1/32"
+    from_port  = 443
+    to_port    = 443
+  }
+  # Vault reporting ip deny end
+
   egress {
     protocol   = "all"
     rule_no    = 100
