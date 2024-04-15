@@ -1,6 +1,6 @@
 provider "tfe" {
   organization = "insideinfo_jinsu"
-  token        = var.TFC_TOKEN
+  # token        = var.TFC_TOKEN
 }
 
 provider "aws" {
@@ -12,12 +12,12 @@ provider "aws" {
 
 ## Local 실행모드 설정
 ## terraform login 필요
-# terraform {
-#   cloud {
-#     organization = "insideinfo_jinsu"
+terraform {
+  cloud {
+    organization = "insideinfo_jinsu"
 
-#     workspaces {
-#       name = "vpc"
-#     }
-#   }
-# }
+    workspaces {
+      name = "vpc"
+    }
+  }
+}

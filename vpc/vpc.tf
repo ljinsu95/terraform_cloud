@@ -18,18 +18,20 @@ resource "aws_vpc" "main" {
 ## https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 resource "aws_subnet" "main" {
   # count = length(var.map_subnet_az[var.aws_region]) # 지정한 AZ 수 만큼 Subnet 생성
-  count = length(lookup(var.map_subnet_az, var.aws_region)) # 지정한 AZ 수 만큼 Subnet 생성
+  # count = length(lookup(var.map_subnet_az, var.aws_region)) # 지정한 AZ 수 만큼 Subnet 생성
+  count = length(data.aws_availability_zones.available.names) # AZ 수 만큼 Subnet 생성
 
   vpc_id = aws_vpc.main.id
 
-  availability_zone = var.map_subnet_az[var.aws_region][count.index].availability_zone
+  # availability_zone = var.map_subnet_az[var.aws_region][count.index].availability_zone
+  availability_zone = data.aws_availability_zones.available.names[count.index]
   # cidr_block        = var.map_subnet_az[var.aws_region][count.index].cidr_block
-  cidr_block        = cidrsubnet(var.aws_vpc_cidr, 8, count.index)
+  cidr_block = cidrsubnet(var.aws_vpc_cidr, 8, count.index)
 
   map_public_ip_on_launch = true # 퍼블릭 IP 주소 자동 할당
 
   tags = {
-    Name = "${var.prefix}_subnet_public${tonumber(count.index) + 1}-${var.map_subnet_az[var.aws_region][count.index].availability_zone}"
+    Name = "${var.prefix}_subnet_public${tonumber(count.index) + 1}-${data.aws_availability_zones.available.names[count.index]}"
   }
 }
 
@@ -60,7 +62,7 @@ resource "aws_route_table" "main" {
 ## Route Table 연결
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 resource "aws_route_table_association" "rtb_sn" {
-  count          = length(var.map_subnet_az[var.aws_region])
+  count          = length(data.aws_availability_zones.available.names)
   subnet_id      = aws_subnet.main[count.index].id
   route_table_id = aws_route_table.main.id
 }
@@ -95,7 +97,7 @@ resource "aws_security_group" "all" {
 resource "aws_network_acl" "main" {
   vpc_id = aws_vpc.main.id
 
-  
+
   # Vault reporting ip deny start
   egress {
     protocol   = "tcp"
@@ -159,7 +161,7 @@ resource "aws_network_acl" "main" {
 
 ## Network ACL 연결
 resource "aws_network_acl_association" "main" {
-  count          = length(var.map_subnet_az[var.aws_region])
+  count          = length(data.aws_availability_zones.available.names)
   network_acl_id = aws_network_acl.main.id
   subnet_id      = aws_subnet.main[count.index].id
 }
