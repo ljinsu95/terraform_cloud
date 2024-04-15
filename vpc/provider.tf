@@ -17,11 +17,7 @@ provider "aws" {
 #     organization = "insideinfo_jinsu"
 
 #     workspaces {
-#       name = path.cwd
+#       name = "vpc"
 #     }
 #   }
-# }
-
-# locals {
-#   path = path.cwd
 # }

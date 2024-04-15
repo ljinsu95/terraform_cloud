@@ -45,7 +45,7 @@ resource "aws_internet_gateway" "main" {
 
 ## Route Table
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
-resource "aws_route_table" "fdo" {
+resource "aws_route_table" "main" {
   vpc_id = aws_vpc.main.id
   route {
     cidr_block = "0.0.0.0/0"
@@ -62,7 +62,7 @@ resource "aws_route_table" "fdo" {
 resource "aws_route_table_association" "rtb_sn" {
   count          = length(var.map_subnet_az[var.aws_region])
   subnet_id      = aws_subnet.main[count.index].id
-  route_table_id = aws_route_table.fdo.id
+  route_table_id = aws_route_table.main.id
 }
 
 ## Security Group
@@ -92,7 +92,7 @@ resource "aws_security_group" "all" {
 
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl
 ## Network ACL
-resource "aws_network_acl" "fdo" {
+resource "aws_network_acl" "main" {
   vpc_id = aws_vpc.main.id
 
   
@@ -158,9 +158,9 @@ resource "aws_network_acl" "fdo" {
 }
 
 ## Network ACL 연결
-resource "aws_network_acl_association" "fdo" {
+resource "aws_network_acl_association" "main" {
   count          = length(var.map_subnet_az[var.aws_region])
-  network_acl_id = aws_network_acl.fdo.id
+  network_acl_id = aws_network_acl.main.id
   subnet_id      = aws_subnet.main[count.index].id
 }
 ########################
