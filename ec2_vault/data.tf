@@ -42,5 +42,5 @@ data "aws_ami" "amazon_linux_2" {
   }
 }
 output "ami" {
-  value = data.aws_ami.name
+  value = data.aws_ami.amazon_linux_2.name
 }
