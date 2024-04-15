@@ -1,4 +1,4 @@
-data "tfe_workspace" "main" {
-  name         = "main"
-  organization = "insideinfo_jinsu"
-}
+# data "tfe_workspace" "main" {
+#   name         = "vpc"
+#   organization = "insideinfo_jinsu"
+# }
