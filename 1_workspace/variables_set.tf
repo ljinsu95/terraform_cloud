@@ -29,7 +29,7 @@ resource "tfe_variable" "TFC_TOKEN" {
 resource "tfe_variable" "aws_access_key" {
   key             = "AWS_ACCESS_KEY_ID"
   value           = ""  # 개인 AWS Access Key 입력
-  sensitive       = true
+  sensitive       = false
   category        = "terraform"
   variable_set_id = tfe_variable_set.org_variable_set.id
 }
@@ -37,7 +37,7 @@ resource "tfe_variable" "aws_access_key" {
 resource "tfe_variable" "aws_secret_key" {
   key             = "AWS_SECRET_ACCESS_KEY"
   value           = "" # 개인 AWS Secret Key 입력
-  sensitive       = false
+  sensitive       = true
   category        = "terraform"
   variable_set_id = tfe_variable_set.org_variable_set.id
 }

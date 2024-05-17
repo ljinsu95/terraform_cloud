@@ -11,7 +11,7 @@ variable "TFC_TOKEN" {
 
 variable "TFC_ORGANIZATION_NAME" {
   type        = string
-  description = "개인 ORG 명F"
+  description = "개인 ORG 명"
 }
 
 variable "tfc_project_name" {
@@ -27,8 +27,11 @@ variable "GITHUB_API_TOKEN" {
 }
 
 variable "workspace_names" {
-  type        = list(string)
-  default     = ["vpc", "ec2_vault"]
+  type = list(string)
+  default = [
+    "vpc",
+    "ec2_vault_ratf",
+  ]
   description = "workspace(=directory) 명 목록"
 }
 
