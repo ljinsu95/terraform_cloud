@@ -9,6 +9,11 @@ variable "TFC_TOKEN" {
   sensitive   = true
 }
 
+variable "TFC_ORGANIZATION_NAME" {
+  type        = string
+  description = "개인 ORG 명"
+}
+
 variable "AWS_ACCESS_KEY_ID" {
   description = "AWS ACCESS KEY"
   sensitive   = true

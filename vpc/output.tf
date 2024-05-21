@@ -7,3 +7,7 @@ output "vpc_id" {
   value = aws_vpc.main.id
   description = "main vpc id"
 }
+
+output "TFC_ORGANIZATION_NAME" {
+  value = var.TFC_ORGANIZATION_NAME
+}
