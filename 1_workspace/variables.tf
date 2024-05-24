@@ -31,6 +31,7 @@ variable "workspace_names" {
   default = [
     "vpc",
     "ec2_vault_ratf",
+    "tfe_fdo",
   ]
   description = "workspace(=directory) 명 목록"
 }
