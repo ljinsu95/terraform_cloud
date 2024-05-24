@@ -17,7 +17,8 @@ terraform {
     organization = "insideinfo_jinsu"
 
     workspaces {
-      name = path.cwd
+      # name = path.cwd
+      name = "ec2_vault_raft"
     }
   }
 }
