@@ -8,6 +8,8 @@ resource "vault_mount" "db" {
   namespace = vault_namespace.db.path
   path      = "database"
   type      = "database"
+
+  depends_on = [aws_db_instance.vault]
 }
 
 ## Database Connection 생성

@@ -33,7 +33,7 @@ variable "VAULT_TOKEN" {
 variable "db_used" {
   type = set(string)
   default = [
-    "postgres",
+    # "postgres",
     "mysql",
   ]
 }
