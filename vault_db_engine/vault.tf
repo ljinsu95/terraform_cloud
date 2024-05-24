@@ -34,7 +34,7 @@ resource "vault_database_secret_backend_connection" "postgres" {
 
 resource "vault_database_secret_backend_connection" "mysql" {
   count      = contains(var.db_used, "mysql") ? 1 : 0
-  depends_on = [aws_db_instance.vault["mysql"]]
+  depends_on = [aws_db_instance.vault["mysql"], vault_mount.db]
 
 
   plugin_name   = "mysql-database-plugin"
@@ -62,6 +62,8 @@ resource "vault_database_secret_backend_role" "postgres" {
   creation_statements = ["CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}';"]
   default_ttl         = 1 * 60 * 60
   max_ttl             = 30 * 24 * 60 * 60
+
+  depends_on = [vault_database_secret_backend_connection.postgres]
 }
 
 resource "vault_database_secret_backend_role" "mysql" {
@@ -74,6 +76,8 @@ resource "vault_database_secret_backend_role" "mysql" {
   creation_statements = ["CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';"]
   default_ttl         = 1 * 60 * 60
   max_ttl             = 30 * 24 * 60 * 60
+
+  depends_on = [vault_database_secret_backend_connection.mysql]
 }
 
 
