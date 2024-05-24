@@ -30,7 +30,7 @@ variable "workspace_names" {
   type = list(string)
   default = [
     "vpc",
-    "ec2_vault_ratf",
+    "ec2_vault_raft",
     "tfe_fdo",
   ]
   description = "workspace(=directory) 명 목록"
