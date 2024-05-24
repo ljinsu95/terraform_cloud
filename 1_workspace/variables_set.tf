@@ -49,3 +49,11 @@ resource "tfe_variable" "vault_license" {
   category        = "terraform"
   variable_set_id = tfe_variable_set.org_variable_set.id
 }
+
+resource "tfe_variable" "vault_token" {
+  key             = "VAULT_TOKEN"
+  value           = "" # VAULT_TOKEN 입력
+  sensitive       = true
+  category        = "terraform"
+  variable_set_id = tfe_variable_set.org_variable_set.id
+}

@@ -32,6 +32,7 @@ variable "workspace_names" {
     "vpc",
     "ec2_vault_raft",
     "tfe_fdo",
+    "vault_db_engine"
   ]
   description = "workspace(=directory) 명 목록"
 }
