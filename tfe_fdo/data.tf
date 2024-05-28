@@ -1,6 +1,6 @@
 # data source
 
-## vpc 목록 조회
+## 사용가능한 vpc 목록 조회
 data "aws_vpcs" "existing" {}
 
 
@@ -10,7 +10,7 @@ data "aws_vpc" "selected" {
   id = data.aws_vpcs.existing.ids[0]
 }
 
-## 
+## 사용가능한 보안 그룹 목록 조회
 ### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_groups
 data "aws_security_groups" "common" {
   filter {
@@ -19,7 +19,7 @@ data "aws_security_groups" "common" {
   }
 }
 
-## subnet 조회
+## 사용가능한 subnet 목록 조회
 data "aws_subnets" "common" {
   filter {
     name   = "vpc-id"
@@ -27,6 +27,7 @@ data "aws_subnets" "common" {
   }
 }
 
+## 사용 가능한 subnet 조회
 ### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets
 data "aws_subnet" "common" {
   count = length(data.aws_subnets.common.ids)
@@ -37,6 +38,7 @@ data "aws_subnet" "common" {
   }
 }
 
+## 사용 가능한 AZ 목록 조회
 data "aws_availability_zones" "available" {}
 
 output "aws_subnet_select" {
