@@ -25,6 +25,10 @@ data "aws_subnets" "common" {
     name   = "vpc-id"
     values = [data.aws_vpc.selected.id]
   }
+  filter {
+    name   = "map-public-ip-on-launch"
+    values = ["true"]
+  }
 }
 
 ## 사용 가능한 subnet 조회
@@ -40,7 +44,3 @@ data "aws_subnet" "common" {
 
 ## 사용 가능한 AZ 목록 조회
 data "aws_availability_zones" "available" {}
-
-output "aws_subnet_select" {
-  value = data.aws_vpc.selected
-}

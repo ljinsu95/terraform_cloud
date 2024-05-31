@@ -20,6 +20,6 @@ resource "aws_security_group" "all" {
   }
 
   tags = {
-    Name = "${var.prefix}_sg_All_allowed-fdo"
+    Name = "${var.prefix}-All-allowed-fdo"
   }
 }

@@ -15,14 +15,14 @@ resource "aws_db_subnet_group" "fdo" {
 ## RDS 구성 (RDS Aurora 사용 시 aws_rds_cluster 리소스 구성)
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance
 resource "aws_db_instance" "fdo" {
-  identifier = replace("${var.prefix}_postgre", "_", "-") # RDS 데이터베이스 식별자 명 (언더바 사용 불가)
+  identifier = replace("${var.prefix}-postgre", "_", "-") # RDS 데이터베이스 식별자 명 (언더바 사용 불가)
 
   engine                      = "postgres" # 지원 하는 값은 https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html#API_CreateDBInstance_RequestParameters - Engine 확인
   engine_version              = "15"       # 지원하는 버전 목록 https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-release-calendar.html
   allow_major_version_upgrade = false
   auto_minor_version_upgrade  = false
 
-  db_name  = "${var.prefix}_database"
+  db_name  = replace("${var.prefix}_database", "-", "_")
   username = "postgres"
   password = "insideinfo"
 

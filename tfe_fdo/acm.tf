@@ -11,7 +11,7 @@ resource "tls_private_key" "fdo" {
 # https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert
 resource "tls_self_signed_cert" "fdo" {
   private_key_pem = tls_private_key.fdo.private_key_pem
-  dns_names       = ["${var.prefix}.${var.aws_hostingzone}"]
+  dns_names       = [aws_route53_record.fdo.name]
 
   # 인증서 요청 대상 지정
   subject {
@@ -20,7 +20,7 @@ resource "tls_self_signed_cert" "fdo" {
     locality            = "Gang-Nam"
     organization        = "Insideinfo, Inc"
     organizational_unit = "Engineering"
-    common_name         = "${var.prefix}.${var.aws_hostingzone}" # DNS 명
+    common_name         = aws_route53_record.fdo.name # DNS 명
   }
 
   validity_period_hours = 24 * 30 # 발급 후 인증서가 유효한 상태로 유지되는 시간
@@ -31,6 +31,8 @@ resource "tls_self_signed_cert" "fdo" {
     "digital_signature",
     "server_auth",
   ]
+
+  depends_on = [aws_route53_record.fdo]
 }
 
 ## AWS ACM 인증서 가져오기로 등록

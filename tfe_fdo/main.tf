@@ -32,7 +32,7 @@ resource "aws_route53_record" "fdo" {
 ## S3 Bucket 추가
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 resource "aws_s3_bucket" "fdo" {
-  bucket = lower(replace("${var.prefix}_bucket", "_", "-"))
+  bucket = lower(replace("${var.prefix}-bucket", "_", "-"))
 }
 
 ## S3 Bucket 파일(terraform.hclic) 업로드
@@ -78,7 +78,7 @@ resource "aws_s3_object" "bundle_pem" {
 ## Auto Scale Group 생성
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group
 resource "aws_autoscaling_group" "fdo" {
-  name = "${var.prefix}_asg"
+  name = replace("${var.prefix}_asg", "-", "_")
 
   # 1. 시작 템플릿 또는 구성 선택
   # launch_configuration = aws_launch_template.fdo.name

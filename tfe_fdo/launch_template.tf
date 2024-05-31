@@ -88,13 +88,13 @@ resource "aws_launch_template" "fdo" {
     arn = aws_iam_instance_profile.fdo.arn
   }
 
-  user_data = templatefile(
+  user_data = base64encode(templatefile(
     "${path.module}/user_data.tpl",
     {
       COMPOSE_PROJECT_NAME = "$${COMPOSE_PROJECT_NAME}"
       HOME                 = "/home/ec2-user"
       BUCKET               = aws_s3_bucket.fdo.bucket
-      TFE_HOSTNAME         = "${var.prefix}.${var.aws_hostingzone}"
+      TFE_HOSTNAME         = aws_route53_record.fdo.name
       TFE_IACT_SUBNETS = join(",", flatten([
         for az in data.aws_subnet.common : az.cidr_block
       ]))
@@ -111,5 +111,5 @@ resource "aws_launch_template" "fdo" {
       # TFE_REDIS_HOST               = "${aws_elasticache_replication_group.name.primary_endpoint_address}:${aws_elasticache_replication_group.name.port}"
       TFE_REDIS_HOST = "${aws_elasticache_cluster.fdo.cache_nodes[0]["address"]}:${aws_elasticache_cluster.fdo.cache_nodes[0]["port"]}"
     }
-  )
+  ))
 }

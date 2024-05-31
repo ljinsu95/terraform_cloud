@@ -4,7 +4,7 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
 resource "aws_lb_target_group" "fdo_https" {
   target_type = "instance"
-  name        = replace("${var.prefix}_lb_tg_443", "_", "-")
+  name        = replace("${var.prefix}-lb-tg-443", "_", "-")
   port        = 443
   protocol    = "HTTPS"
   vpc_id      = data.aws_vpc.selected.id
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "fdo_https" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
 resource "aws_lb_target_group" "fdo_http" {
   target_type = "instance"
-  name        = replace("${var.prefix}_lb_tg_8800", "_", "-")
+  name        = replace("${var.prefix}-lb-tg-8800", "_", "-")
   port        = 8800
   protocol    = "HTTP"
   vpc_id      = data.aws_vpc.selected.id
@@ -44,7 +44,7 @@ resource "aws_lb_target_group" "fdo_http" {
 ## ALB 생성
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 resource "aws_lb" "fdo" {
-  name               = replace("${var.prefix}_alb", "_", "-")
+  name               = replace("${var.prefix}-alb", "_", "-")
   internal           = false # 내부망 여부
   load_balancer_type = "application"
   security_groups    = [aws_security_group.all.id]
