@@ -6,7 +6,7 @@ variable "prefix" {
 
 variable "AWS_ACCESS_KEY_ID" {
   type = string
-  description = "AWS_ACCESS_KEY"
+  description = "AWS ACCESS KEY"
   sensitive   = true
 }
 

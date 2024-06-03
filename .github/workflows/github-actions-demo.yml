@@ -39,21 +39,3 @@ jobs: # 워크플로 에서 실행되는 모든 작업을 그룹화
     #   - run: echo ${{ steps.plan.outputs.stdout }}
     #   - run: echo ${{ steps.plan.outputs.stderr }}
     #   - run: echo ${{ steps.plan.outputs.exitcode }}
-
-#   Terraform-Deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: hashicorp/setup-terraform@v3 
-#         with:
-#           cli_config_credentials_hostname: 'app.terraform.io'         # 테라폼 hostname
-#           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}   # GitHub Secrets - TF_API_TOKEN : 테라폼 API 토큰
-#           terraform_wrapper: true 
-#       - run: terraform init
-#       - run: ls ${{ github.action_path }}
-#       - run: pwd
-#       - run: cd $(pwd)/tfe_fdo
-#       - id: plan
-#         run: terraform plan -no-color
-#       - run: echo ${{ steps.plan.outputs.stdout }}
-#       - run: echo ${{ steps.plan.outputs.stderr }}
-#       - run: echo ${{ steps.plan.outputs.exitcode }}
