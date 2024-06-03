@@ -1,6 +1,7 @@
 # data source
 
 ## 사용가능한 vpc 목록 조회
+### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpcs
 data "aws_vpcs" "existing" {}
 
 
