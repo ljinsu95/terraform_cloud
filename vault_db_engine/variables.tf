@@ -22,26 +22,27 @@ variable "aws_region" {
 }
 
 variable "VAULT_ADDR" {
-  type = string
+  type        = string
   description = "Vault 서버 주소"
 }
 variable "VAULT_TOKEN" {
-  type = string
+  type        = string
   description = "Vault Token"
 }
 
-variable "db_used" {
-  type = set(string)
-  default = [
-    # "postgres",
-    "mysql",
-  ]
-}
+# variable "db_used" {
+#   type = set(string)
+#   default = [
+#     # "postgres",
+#     "mysql",
+#   ]
+# }
 
 variable "db_info" {
   description = "생성할 DB 정보"
   type = map(object(
     {
+      used           = bool
       engine         = string
       engine_version = string
       db_name        = string
@@ -51,13 +52,15 @@ variable "db_info" {
   ))
   default = {
     postgres = {
+      used           = true
       engine         = "postgres"
-      engine_version = "16.1"
+      engine_version = "15.6"
       db_name        = "postgres"
       username       = "postgres"
       password       = "pa$$w0rd"
     },
     mysql = {
+      used           = false
       engine         = "mysql"
       engine_version = "8.0.35"
       db_name        = ""

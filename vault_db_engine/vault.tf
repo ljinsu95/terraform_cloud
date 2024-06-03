@@ -15,7 +15,7 @@ resource "vault_mount" "db" {
 ## Database Connection 생성
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/database_secret_backend_connection
 resource "vault_database_secret_backend_connection" "postgres" {
-  count      = contains(var.db_used, "postgres") ? 1 : 0
+  count      = var.db_info["postgres"].used ? 1 : 0
   depends_on = [aws_db_instance.vault["postgres"]]
 
   plugin_name   = "postgresql-database-plugin"
@@ -33,7 +33,7 @@ resource "vault_database_secret_backend_connection" "postgres" {
 }
 
 resource "vault_database_secret_backend_connection" "mysql" {
-  count      = contains(var.db_used, "mysql") ? 1 : 0
+  count      = var.db_info["mysql"].used ? 1 : 0
   depends_on = [aws_db_instance.vault["mysql"], vault_mount.db]
 
 
@@ -53,7 +53,7 @@ resource "vault_database_secret_backend_connection" "mysql" {
 
 # https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/database_secret_backend_role
 resource "vault_database_secret_backend_role" "postgres" {
-  count = contains(var.db_used, "postgres") ? 1 : 0
+  count = var.db_info["postgres"].used ? 1 : 0
 
   namespace           = vault_namespace.db.path
   backend             = vault_mount.db.path
@@ -67,7 +67,7 @@ resource "vault_database_secret_backend_role" "postgres" {
 }
 
 resource "vault_database_secret_backend_role" "mysql" {
-  count = contains(var.db_used, "mysql") ? 1 : 0
+  count = var.db_info["mysql"].used ? 1 : 0
 
   namespace           = vault_namespace.db.path
   backend             = vault_mount.db.path

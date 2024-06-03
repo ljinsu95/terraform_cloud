@@ -14,18 +14,18 @@ resource "aws_db_subnet_group" "vault" {
 ## RDS 구성 (RDS Aurora 사용 시 aws_rds_cluster 리소스 구성)
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance
 resource "aws_db_instance" "vault" {
-  for_each = var.db_used
+  for_each = local.enabled_database
 
   identifier = replace("${var.prefix}_${each.key}_vault", "_", "-") # RDS 데이터베이스 식별자 명 (언더바 사용 불가)
 
-  engine                      = var.db_info[each.value].engine         # 지원 하는 값은 https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html#API_CreateDBInstance_RequestParameters - Engine 확인
-  engine_version              = var.db_info[each.value].engine_version # 지원하는 버전 목록 https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-release-calendar.html
+  engine                      = each.value.engine         # 지원 하는 값은 https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html#API_CreateDBInstance_RequestParameters - Engine 확인
+  engine_version              = each.value.engine_version # 지원하는 버전 목록 https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-release-calendar.html
   allow_major_version_upgrade = false
   auto_minor_version_upgrade  = false
 
-  db_name  = var.db_info[each.value].db_name
-  username = var.db_info[each.value].username
-  password = var.db_info[each.value].password
+  db_name  = each.value.db_name
+  username = each.value.username
+  password = each.value.password
 
   instance_class         = "db.t3.micro" # RDS 인스턴스의 인스턴스 유형
   allocated_storage      = 10
