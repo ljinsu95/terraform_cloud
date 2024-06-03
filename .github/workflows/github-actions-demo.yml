@@ -16,6 +16,9 @@ jobs: # 워크플로 에서 실행되는 모든 작업을 그룹화
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      # test
+      - run: pwd
+      - run: cd $(pwd)/tfe_fdo
 
   Terraform-Deploy:
     runs-on: ubuntu-latest
