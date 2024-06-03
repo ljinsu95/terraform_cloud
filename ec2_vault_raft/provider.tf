@@ -1,7 +1,7 @@
-provider "tfe" {
-  organization = "insideinfo_jinsu"
-  token        = var.TFC_TOKEN
-}
+# provider "tfe" {
+#   organization = "insideinfo_jinsu"
+#   token        = var.TFC_TOKEN
+# }
 
 provider "aws" {
   ## AWS Region
@@ -12,13 +12,13 @@ provider "aws" {
 
 ## remote 실행모드 설정
 ## terraform login 필요
-terraform {
-  cloud {
-    organization = "insideinfo_jinsu"
+# terraform {
+#   cloud {
+#     organization = "insideinfo_jinsu"
 
-    workspaces {
-      # name = path.cwd
-      name = "ec2_vault_raft"
-    }
-  }
-}
+#     workspaces {
+#       # name = path.cwd
+#       name = "ec2_vault_raft"
+#     }
+#   }
+# }

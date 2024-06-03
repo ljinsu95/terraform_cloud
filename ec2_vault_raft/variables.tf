@@ -21,7 +21,6 @@ variable "AWS_SECRET_ACCESS_KEY" {
 
 variable "aws_region" {
   default     = "ca-central-1"
-  # default     = "ap-northeast-2"
   description = "aws region"
 }
 
