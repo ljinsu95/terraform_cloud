@@ -20,6 +20,7 @@ data "aws_security_groups" "common" {
 }
 
 ## 사용가능한 subnet 목록 조회
+### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet
 data "aws_subnets" "common" {
   filter {
     name   = "vpc-id"
