@@ -1,12 +1,12 @@
 variable "prefix" {
   type = string
   default     = "jinsu-tfe-fdo"
-  description = "prefix"
+  description = "prefix [a-z][A-Z][0-9][-]"
 }
 
 variable "AWS_ACCESS_KEY_ID" {
   type = string
-  description = "AWS ACCESS KEY"
+  description = "AWS_ACCESS_KEY"
   sensitive   = true
 }
 
