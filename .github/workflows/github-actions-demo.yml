@@ -27,7 +27,8 @@ jobs: # 워크플로 에서 실행되는 모든 작업을 그룹화
         terraform_wrapper: true 
     - run: terraform init
     - run: ls -al ${{ github.action_path }}
-    - run: cd ${{ github.action_path }}/tfe_fdo
+    - run: pwd
+    - run: cd tfe_fdo
     - id: plan
       run: terraform plan -no-color
     - run: echo ${{ steps.plan.outputs.stdout }}
