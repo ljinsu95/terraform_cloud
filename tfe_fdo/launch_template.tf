@@ -50,7 +50,8 @@ resource "aws_launch_template" "fdo" {
   description            = "테라폼으로 자동 생성한 시작 템플릿"
 
   # 인스턴스 세부 정보
-  instance_type = "t3.small"
+  instance_type = "t3.medium"
+  # instance_type = "t3.small"
   image_id      = data.aws_ami.amazon_linux_2.image_id
   # vpc_security_group_ids = [aws_security_group.all.id]
   key_name = var.pem_key_name
