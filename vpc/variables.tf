@@ -35,7 +35,7 @@ variable "aws_vpc_cidr" {
   description = "AWS VPC CIDR"
 }
 
-variable "pem_key_name" {
-  default     = "jinsu"
-  description = "AWS PEM KEY 명"
-}
+# variable "pem_key_name" {
+#   default     = "jinsu"
+#   description = "AWS PEM KEY 명"
+# }

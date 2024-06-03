@@ -1,9 +1,11 @@
-##########################
-### VPC Resource START ###
-##########################
+# VPC 관련 리소스
+
 ## VPC
+# 이미 생성 되어있는 VPC가 존재한다면 생성하지 않음
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 resource "aws_vpc" "main" {
+  count = local.no_vpc ? 1 : 0
+
   cidr_block = var.aws_vpc_cidr
 
   instance_tenancy     = "default"
@@ -19,9 +21,10 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "main" {
   # count = length(var.map_subnet_az[var.aws_region]) # 지정한 AZ 수 만큼 Subnet 생성
   # count = length(lookup(var.map_subnet_az, var.aws_region)) # 지정한 AZ 수 만큼 Subnet 생성
-  count = length(data.aws_availability_zones.available.names) # AZ 수 만큼 Subnet 생성
+  count = local.no_vpc ? length(data.aws_availability_zones.available.names) : 0 # AZ 수 만큼 Subnet 생성
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = data.aws_vpc.selected.id
+  # vpc_id = aws_vpc.main.id
 
   # availability_zone = var.map_subnet_az[var.aws_region][count.index].availability_zone
   availability_zone = data.aws_availability_zones.available.names[count.index]
@@ -37,7 +40,8 @@ resource "aws_subnet" "main" {
 
 ## Internet Gateway
 resource "aws_internet_gateway" "main" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = data.aws_vpc.selected.id
+  # vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "${var.prefix}_igw"
@@ -48,7 +52,8 @@ resource "aws_internet_gateway" "main" {
 ## Route Table
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 resource "aws_route_table" "main" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = data.aws_vpc.selected.id
+  # vpc_id = aws_vpc.main.id
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
@@ -71,7 +76,8 @@ resource "aws_route_table_association" "rtb_sn" {
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 resource "aws_security_group" "all" {
   name   = "${var.prefix}-All-allowed"
-  vpc_id = aws_vpc.main.id
+  vpc_id = data.aws_vpc.selected.id
+  # vpc_id = aws_vpc.main.id
 
   ingress {
     from_port   = 0
@@ -95,7 +101,8 @@ resource "aws_security_group" "all" {
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl
 ## Network ACL
 resource "aws_network_acl" "main" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = data.aws_vpc.selected.id
+  # vpc_id = aws_vpc.main.id
 
 
   # Vault reporting ip deny start
