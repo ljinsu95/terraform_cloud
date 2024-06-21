@@ -32,7 +32,7 @@ resource "aws_route53_record" "fdo" {
 ## S3 Bucket 추가
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 resource "aws_s3_bucket" "fdo" {
-  bucket = lower(replace("${var.prefix}-bucket", "_", "-"))
+  bucket = lower(replace("${var.prefix}-insideinfo-bucket", "_", "-"))
 }
 
 ## S3 Bucket 파일(terraform.hclic) 업로드
