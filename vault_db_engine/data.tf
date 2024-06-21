@@ -48,3 +48,20 @@ data "aws_db_instances" "name" {}
 # output "db_list" {
 #   value = data.aws_db_instance.name
 # }
+
+# 아마존 리눅스 2 이미지 조회
+### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
+data "aws_ami" "amazon_linux_2" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-kernel-*"]
+  }
+}
