@@ -1,32 +1,39 @@
 #!/bin/bash
-# docker install
+# 1. Docker 설치 및 실행
 sudo yum install -y docker
 sudo systemctl enable docker
 sudo systemctl start docker
 
 cd ${HOME}
+# 2. Docker Compose Plugin 설치
+## DOcker Compose Plugin 다운로드
 curl https://download.docker.com/linux/centos/8/x86_64/stable/Packages/docker-compose-plugin-2.10.2-3.el8.x86_64.rpm -o docker-compose-plugin.rpm
 
+## Docker Compose Plugin 설치
 sudo yum install -y docker-compose-plugin.rpm
 
-## pem download
+# 3. S3 Bucket을 통해 TLS 인증서 및 TFE-FDO 라이센스 다운로드
+## TLS 인증서 다운로드
 aws s3 cp s3://${BUCKET}/terraform/certs/key.pem ${HOME}/certs/key.pem
 aws s3 cp s3://${BUCKET}/terraform/certs/cert.pem ${HOME}/certs/cert.pem
 aws s3 cp s3://${BUCKET}/terraform/certs/bundle.pem ${HOME}/certs/bundle.pem
+
+## TFE-FDO 라이센스 다운로드
 aws s3 cp s3://${BUCKET}/terraform/tfe_license/terraform.hclic /tmp/terraform/terraform.hclic
 
+## (Option) TLS 인증서 이동 (실제 사용되는 파일은 /home/ec2-user/certs/*)
 sudo mkdir -p /etc/ssl/private/terraform-enterprise
 sudo cp ${HOME}/certs/*.pem /etc/ssl/private/terraform-enterprise
 
-# docker 로그인
+# 4. TFE-FDO Docker 이미지 파일 Pull
+## TFE-FDO 라이센스를 통해 Docker(images.releases.hashicorp.com) 로그인
 cat /tmp/terraform/terraform.hclic | sudo docker login --username terraform images.releases.hashicorp.com --password-stdin
 
-# docker pull
-# terraform version : v202311-1
+## Docker Pull (terraform version : v202311-1)
 sudo docker pull images.releases.hashicorp.com/hashicorp/terraform-enterprise:v202311-1
 
 
-
+# 5. Docker Compose 파일 설정
 tee compose.yaml -<<EOF
 ---
 name: terraform-enterprise
@@ -36,8 +43,8 @@ services:
     image: images.releases.hashicorp.com/hashicorp/terraform-enterprise:v202311-1
     environment:
       ## 라이센스 추가
-      TFE_LICENSE: "$(cat /tmp/terraform/terraform.hclic)"
-      #TFE_LICENSE_PATH: "/tmp/terraform/terraform.hclic"
+      # TFE_LICENSE: "$(cat /tmp/terraform/terraform.hclic)"
+      TFE_LICENSE_PATH: "/tmp/terraform/terraform.hclic"
       ## hostname 추가
       TFE_HOSTNAME: "${TFE_HOSTNAME}"
       ## 암호화 패스워드 지정
@@ -67,6 +74,7 @@ services:
       ## aws key
       #TFE_OBJECT_STORAGE_S3_ACCESS_KEY_ID: ""
       #TFE_OBJECT_STORAGE_S3_SECRET_ACCESS_KEY: ""
+      # AWS INSTANCE PROFILE 사용 여부
       TFE_OBJECT_STORAGE_S3_USE_INSTANCE_PROFILE: "true"
       ## S3 리전
       TFE_OBJECT_STORAGE_S3_REGION: "${TFE_OBJECT_STORAGE_S3_REGION}"
@@ -83,7 +91,7 @@ services:
       # Vault cluster settings.
       # If you are using the default internal vault, this should be the private routable IP address of the node itself.
       ## 프라이빗 주소 입력
-      TFE_VAULT_CLUSTER_ADDRESS: "http://$(ifconfig eth0 | grep 'inet ' | awk '{print $2}'):8201"
+      TFE_VAULT_CLUSTER_ADDRESS: "http://$(ec2-metadata -o | cut -d " " -f 2):8201"
     cap_add:
       - IPC_LOCK
     read_only: true
@@ -105,15 +113,18 @@ services:
       - type: volume
         source: terraform-enterprise-cache
         target: /var/cache/tfe-task-worker/terraform
+      - type: bind
+        source: /tmp/terraform
+        target: /tmp/terraform
 volumes:
   terraform-enterprise-cache:
 EOF
 
-# 컨테이너 백그라운드 실행
+# 6. 컨테이너 백그라운드 실행
 sudo docker compose up --detach
 
-# 컨테이너 로그 조회
+# 7. (Option) 컨테이너 로그 조회
 # sudo docker compose logs --follow
 
-# 컨테이너 상태 체크
+# 8. (Option) 컨테이너 상태 체크
 # sudo docker compose exec tfe tfe-health-check-status
