@@ -25,7 +25,7 @@ variable "aws_region" {
 }
 
 variable "ec2_count" {
-  default     = 3
+  default     = 1
   description = "EC2 갯수 설정"
 }
 

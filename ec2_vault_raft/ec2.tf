@@ -12,7 +12,7 @@ resource "aws_instance" "vault_raft_amz2" {
   security_groups = data.aws_security_groups.main.ids
   key_name        = var.pem_key_name
   tags = {
-    Name    = "${var.prefix}-Test-${count.index}"
+    Name    = "${var.prefix}-Vault-${count.index}"
     service = "${var.tag_name}"
   }
 
@@ -20,7 +20,7 @@ resource "aws_instance" "vault_raft_amz2" {
     volume_type = "gp3"
     volume_size = "10"
     tags = {
-      Name = "${var.prefix}_Test_Volume_${count.index}"
+      Name = "${var.prefix}_Vault_Volume_${count.index}"
     }
   }
 
