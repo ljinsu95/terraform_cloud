@@ -29,8 +29,10 @@ resource "aws_instance" "vault_consul_amz2" {
   user_data = templatefile(
     "userdata_vault_server.tpl",
     {
-      TAG           = var.tag_name
-      vault_license = var.VAULT_LICENSE
+      tag_key        = "service",
+      tag_value      = var.tag_name,
+      vault_license  = var.VAULT_LICENSE,
+      consul_license = var.CONSUL_LICENSE
     }
   )
 
@@ -72,8 +74,10 @@ resource "aws_instance" "consul_amz2" {
   user_data = templatefile(
     "userdata_consul_server.tpl",
     {
-      TAG           = var.tag_name
-      vault_license = var.VAULT_LICENSE
+      tag_key        = "service"
+      tag_value      = var.tag_name
+      vault_license  = var.VAULT_LICENSE
+      consul_license = var.CONSUL_LICENSE
     }
   )
 
