@@ -8,7 +8,7 @@ provider "aws" {
 
 
 # remote 실행모드 설정
-# terraform login 필요
+# terraform login 혹은 terraform token 환경변수 필요 TF_TOKEN_app_terraform_io=<YOUR_TERRAFORM_API_TOKEN>
 terraform {
   cloud {
     organization = "insideinfo_jinsu"
