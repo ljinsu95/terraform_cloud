@@ -3,11 +3,11 @@
 resource "aws_instance" "vault_consul_amz2" {
   count = var.ec2_vault_count
 
-  ami             = data.aws_ami.amazon_linux_2.id
-  instance_type   = var.instance_type
-  subnet_id       = data.aws_subnets.main.ids[(tonumber(count.index) + 1) % length(data.aws_subnets.main.ids)]
-  security_groups = data.aws_security_groups.main.ids
-  key_name        = var.pem_key_name
+  ami                    = data.aws_ami.amazon_linux_2.id
+  instance_type          = var.instance_type
+  subnet_id              = data.aws_subnets.main.ids[(tonumber(count.index) + 1) % length(data.aws_subnets.main.ids)]
+  vpc_security_group_ids = toset([aws_security_group.vault_server.id])
+  key_name               = var.pem_key_name
   tags = {
     Name    = "${var.prefix}-Vault-${count.index}"
     service = "${var.tag_name}"
@@ -46,11 +46,11 @@ resource "aws_instance" "vault_consul_amz2" {
 resource "aws_instance" "consul_amz2" {
   count = var.ec2_consul_count
 
-  ami             = data.aws_ami.amazon_linux_2.id
-  instance_type   = var.instance_type
-  subnet_id       = data.aws_subnets.main.ids[(tonumber(count.index) + 1) % length(data.aws_subnets.main.ids)]
-  security_groups = data.aws_security_groups.main.ids
-  key_name        = var.pem_key_name
+  ami                    = data.aws_ami.amazon_linux_2.id
+  instance_type          = var.instance_type
+  subnet_id              = data.aws_subnets.main.ids[(tonumber(count.index) + 1) % length(data.aws_subnets.main.ids)]
+  vpc_security_group_ids = toset([aws_security_group.consul.id])
+  key_name               = var.pem_key_name
   tags = {
     Name    = "${var.prefix}-Consul-${count.index}"
     service = "${var.tag_name}"

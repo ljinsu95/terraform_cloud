@@ -58,3 +58,4 @@ ${consul_license}
 EOF
 
 sudo systemctl enable consul
+sudo systemctl start consul

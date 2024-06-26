@@ -117,3 +117,6 @@ EOF
 
 sudo systemctl enable consul
 sudo systemctl enable vault
+
+sudo systemctl start consul
+sudo systemctl start vault
