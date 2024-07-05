@@ -50,4 +50,11 @@ build {
       "echo \"FOO is $FOO\" > example.txt",
     ]
   }
+
+  # 빌드 후 내역 저장
+  post-processor "manifest" {
+    output     = "manifest.json"
+    strip_path = true
+  }
+  
 }
