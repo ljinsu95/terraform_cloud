@@ -26,13 +26,13 @@ data "aws_internet_gateway" "default" {
 
 ## 라우팅 테이블 조회
 ### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route_table
-data "aws_route_table" "name" {
-  route_table_id = "rtb-03bf56f520ee55227"
-  # filter {
-  #   name   = "association.route-table-association-id"
-  #   values = [data.aws_internet_gateway.default.internet_gateway_id]
-  # }
-}
+# data "aws_route_table" "name" {
+#   route_table_id = "rtb-03bf56f520ee55227"
+#   # filter {
+#   #   name   = "association.route-table-association-id"
+#   #   values = [data.aws_internet_gateway.default.internet_gateway_id]
+#   # }
+# }
 
 ## 서브넷 리스트 조회
 data "aws_subnets" "main" {
