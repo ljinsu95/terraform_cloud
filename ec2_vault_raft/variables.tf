@@ -59,3 +59,4 @@ variable "architecture" {
   default     = "x86"
   description = "ec2에 사용되는 아키텍쳐 명"
 }
+
