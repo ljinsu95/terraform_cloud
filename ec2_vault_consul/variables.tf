@@ -30,8 +30,8 @@ variable "ec2_consul_count" {
 
 variable "tag_name" {
   type        = string
-  default     = "vault_auto_join"
-  description = "vault_auto_join을 위한 태그 명"
+  default     = "consul_auto_join"
+  description = "consul_auto_join을 위한 태그 명"
 }
 
 variable "VAULT_LICENSE" {
