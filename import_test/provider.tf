@@ -6,3 +6,15 @@ provider "aws" {
   secret_key = var.AWS_SECRET_ACCESS_KEY
 }
 
+# remote 실행모드 설정
+# terraform login 필요
+terraform {
+  cloud {
+    organization = "insideinfo_jinsu"
+
+    workspaces {
+      # name = path.cwd
+      name = "import_test"
+    }
+  }
+}
