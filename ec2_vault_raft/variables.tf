@@ -25,13 +25,13 @@ variable "aws_region" {
 }
 
 variable "ec2_count" {
-  default     = 1
+  default     = 3
   description = "EC2 갯수 설정"
 }
 
 variable "tag_name" {
   type        = string
-  default     = "vault_auto_join"
+  default     = "vault_auto_join_telemetry"
   description = "vault_auto_join을 위한 태그 명"
 }
 
