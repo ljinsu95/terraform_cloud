@@ -38,7 +38,7 @@ variable "tag_name" {
 variable "VAULT_LICENSE" {
   type        = string
   description = "License for the Vault"
-  # default    = "YOUR_DEFAULT_VALUE" # 필요한 경우 기본값 설정
+  # default    = "YOUR_DEFAULT_VALUE" # 필요한 경우 기본값 설정 
 }
 
 variable "pem_key_name" {
