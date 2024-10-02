@@ -31,14 +31,14 @@ variable "ec2_count" {
 
 variable "tag_name" {
   type        = string
-  default     = "vault_auto_join_telemetry"
+  default     = "vault_auto_join_0926"
   description = "vault_auto_join을 위한 태그 명"
 }
 
 variable "VAULT_LICENSE" {
   type        = string
   description = "License for the Vault"
-  # default    = "YOUR_DEFAULT_VALUE" # 필요한 경우 기본값 설정
+  # default    = "YOUR_DEFAULT_VALUE" # 필요한 경우 기본값 설정 
 }
 
 variable "pem_key_name" {
