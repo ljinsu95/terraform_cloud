@@ -21,3 +21,12 @@ variable "aws_region" {
   default     = "ca-central-1"
   description = "aws region"
 }
+
+### 사용되지 않는 변수
+variable "TFC_TOKEN" {
+  
+}
+
+variable "VAULT_TOKEN" {
+  
+}
