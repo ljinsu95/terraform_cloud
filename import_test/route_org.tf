@@ -1,8 +1,8 @@
 # Route Table Improt
-# import {
-#   id = "rtb-079e6beb839030847"               # ROUTE_TABLE_ID
-#   to = aws_route_table.terraform-import-test # ROUTE_TABLE Import Target
-# }
+import {
+  id = "rtb-079e6beb839030847"               # ROUTE_TABLE_ID
+  to = aws_route_table.terraform-import-test # ROUTE_TABLE Import Target
+}
 
 # ROUTE_TABLE Import Target
 resource "aws_route_table" "terraform-import-test" {
@@ -19,10 +19,10 @@ resource "aws_route_table" "terraform-import-test" {
 }
 
 # Route Table Association Import 1
-# import {
-#   id = "subnet-0c47e5a32380dfac3/rtb-079e6beb839030847"    # SUBNET_ID/ROUTE_TABLE_ID 
-#   to = aws_route_table_association.terraform-import-test-1 # ROUTE_TABLE_ADDOCIATION Import Target 1
-# }
+import {
+  id = "subnet-0c47e5a32380dfac3/rtb-079e6beb839030847"    # SUBNET_ID/ROUTE_TABLE_ID 
+  to = aws_route_table_association.terraform-import-test-1 # ROUTE_TABLE_ADDOCIATION Import Target 1
+}
 
 # ROUTE_TABLE_ADDOCIATION Import Target 1
 resource "aws_route_table_association" "terraform-import-test-1" {
@@ -31,10 +31,10 @@ resource "aws_route_table_association" "terraform-import-test-1" {
 }
 
 # Route Table Association Import 2
-# import {
-#   id = "subnet-0a48ca5abc44c202c/${aws_route_table.terraform-import-test.id}" # SUBNET_ID/ROUTE_TABLE_ID 
-#   to = aws_route_table_association.terraform-import-test-2                    # ROUTE_TABLE_ADDOCIATION Import Target 1
-# }
+import {
+  id = "subnet-0a48ca5abc44c202c/${aws_route_table.terraform-import-test.id}" # SUBNET_ID/ROUTE_TABLE_ID 
+  to = aws_route_table_association.terraform-import-test-2                    # ROUTE_TABLE_ADDOCIATION Import Target 1
+}
 
 # ROUTE_TABLE_ADDOCIATION Import Target 1
 resource "aws_route_table_association" "terraform-import-test-2" {
