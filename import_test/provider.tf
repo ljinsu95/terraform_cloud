@@ -10,6 +10,8 @@ provider "aws" {
 # terraform login 필요
 terraform {
   cloud {
+    # hostname = "jinsu.terraform.insideinfo-cloud.com"
+    # organization = "insideinfo"
     organization = "insideinfo_jinsu"
 
     workspaces {

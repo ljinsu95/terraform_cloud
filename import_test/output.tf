@@ -1,13 +1,19 @@
-# output "vpcs" {
-#   value = data.aws_vpcs.existing
-# }
-# output "vpc" {
-#   value = data.aws_vpc.existing
-# }
+# VPC 리스트 확인
+output "vpcs" {
+  value = data.aws_vpcs.existing
+}
 
-# output "route_tables" {
-#   value = data.aws_route_tables.existing
-# }
+# VPC 확인
+output "vpc" {
+  value = data.aws_vpc.existing
+}
+
+# 모든 VPC에 대한 Route Table 리스트 조회
+output "route_tables" {
+  value = data.aws_route_tables.existing
+}
+
+# VPC 별 모든 Route Table 조회
 output "route_table" {
   value = data.aws_route_table.existing
 }
