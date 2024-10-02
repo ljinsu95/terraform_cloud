@@ -30,3 +30,11 @@ variable "TFC_TOKEN" {
 variable "VAULT_TOKEN" {
   
 }
+
+variable "VAULT_LICENSE" {
+  
+}
+
+variable "TFC_1_1_WORKSPACE_NAME" {
+  
+}
