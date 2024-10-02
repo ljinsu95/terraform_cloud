@@ -48,7 +48,7 @@ resource "aws_route_table" "terraform-import-test" {
   }
 
   tags = {
-    "Name" = "terraform-import-test"
+    "Name" = "tag-modify"
   }
 }
 
