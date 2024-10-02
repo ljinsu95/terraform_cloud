@@ -25,7 +25,7 @@ import {
 resource "aws_route_table" "terraform-import-test" {
   vpc_id = "vpc-0f8af692fead0eaea"
   tags = {
-    "Name" = "terraform-import-test"
+    "Name" = "terraform-import-test-2"
   }
 }
 
