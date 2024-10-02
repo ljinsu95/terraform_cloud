@@ -32,7 +32,7 @@ resource "aws_route_table_association" "terraform-import-test-1" {
 
 # Route Table Association Import 2
 import {
-  id = "subnet-0a48ca5abc44c202c/${aws_route_table.terraform-import-test.id}" # SUBNET_ID/ROUTE_TABLE_ID 
+  id = "subnet-0a48ca5abc44c202c/rtb-079e6beb839030847" # SUBNET_ID/ROUTE_TABLE_ID 
   to = aws_route_table_association.terraform-import-test-2                    # ROUTE_TABLE_ADDOCIATION Import Target 1
 }
 
