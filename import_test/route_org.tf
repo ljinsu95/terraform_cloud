@@ -1,6 +1,6 @@
-resource "aws_route_table" "terraform-import-test" {
-  # (resource arguments)
-}
+# resource "aws_route_table" "terraform-import-test" {
+#   # (resource arguments)
+# }
 # # Route Table Improt
 # # import {
 # #   id = "rtb-079e6beb839030847"               # ROUTE_TABLE_ID
