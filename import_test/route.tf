@@ -77,21 +77,6 @@ subnet-0a48ca5abc44c202c / rtb-079e6beb839030847
 # }
 
 
-# # ROUTE_TABLE Import Target
-resource "aws_route_table" "terraform-import-test" {
-  vpc_id = "vpc-0f8af692fead0eaea"
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "igw-08dd9ebf7680a1486"
-  }
-
-  tags = {
-    "Name" = "terraform-import-test"
-  }
-}
-
-
 # check_route_table = [
 #   {
 #     "arn" = "arn:aws:ec2:ca-central-1:421448405988:route-table/rtb-0e4a118bec4626b86"

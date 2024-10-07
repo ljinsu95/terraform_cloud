@@ -12,10 +12,8 @@ terraform {
   cloud {
     hostname = "jinsu.terraform.insideinfo-cloud.com"
     organization = "insideinfo"
-    # organization = "insideinfo_jinsu"
 
     workspaces {
-      # name = path.cwd
       name = "import_test"
     }
   }

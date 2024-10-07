@@ -1,5 +1,5 @@
 # VPC 리스트 조회
-data "aws_vpcs" "existing" {}
+# data "aws_vpcs" "existing" {}
 
 # # VPC 조회
 # data "aws_vpc" "existing" {
