@@ -1,14 +1,14 @@
-# VPC_ID에 속한 Route_Table 리스트 조회
-data "aws_route_tables" "existing" {
-  count  = length(data.aws_vpcs.existing.ids)      # VPC 갯수
-  vpc_id = data.aws_vpcs.existing.ids[count.index] # VPC_IDS[count.index]의 VPC ID
-}
+# # VPC_ID에 속한 Route_Table 리스트 조회
+# data "aws_route_tables" "existing" {
+#   count  = length(data.aws_vpcs.existing.ids)      # VPC 갯수
+#   vpc_id = data.aws_vpcs.existing.ids[count.index] # VPC_IDS[count.index]의 VPC ID
+# }
 
-# VPC_ID[0]의 Route_Table의 세부 정보 조회
-data "aws_route_table" "existing" {
-  count          = length(data.aws_route_tables.existing[0].ids)      # VPC_ID[0]에 속한 Route Table 리스트 갯수
-  route_table_id = data.aws_route_tables.existing[0].ids[count.index] # ROUTE_TABLE_IDS[count.index]의 ID
-}
+# # VPC_ID[0]의 Route_Table의 세부 정보 조회
+# data "aws_route_table" "existing" {
+#   count          = length(data.aws_route_tables.existing[0].ids)      # VPC_ID[0]에 속한 Route Table 리스트 갯수
+#   route_table_id = data.aws_route_tables.existing[0].ids[count.index] # ROUTE_TABLE_IDS[count.index]의 ID
+# }
 
 /*
 rtb-03bf56f520ee55227 - main
