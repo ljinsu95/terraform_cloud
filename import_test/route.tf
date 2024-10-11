@@ -238,3 +238,39 @@ subnet-0a48ca5abc44c202c / rtb-079e6beb839030847
 #     "vpc_id" = "vpc-0f8af692fead0eaea"
 #   },
 # ]
+
+
+# ROUTE_TABLE Import Target
+resource "aws_route_table" "terraform-import-test" {
+  vpc_id = "vpc-0f8af692fead0eaea"
+
+  tags = {
+    "Name" = "terraform-import-test"
+  }
+}
+
+# ROUTE Import Target 1
+resource "aws_route" "terraform-import-test-1" {
+  route_table_id         = aws_route_table.terraform-import-test.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = "igw-08dd9ebf7680a1486"
+}
+
+# ROUTE Import Target 2
+resource "aws_route" "terraform-import-test-2" {
+  route_table_id         = aws_route_table.terraform-import-test.id
+  destination_cidr_block = "172.32.0.0/24"
+  transit_gateway_id     = "tgw-07dc79da1274746a0"
+}
+
+# ROUTE_TABLE_ASSOCIATION Import Target 1
+resource "aws_route_table_association" "terraform-import-test-1" {
+  route_table_id = "rtb-079e6beb839030847"
+  subnet_id      = "subnet-0c47e5a32380dfac3"
+}
+
+# ROUTE_TABLE_ASSOCIATION Import Target 2
+resource "aws_route_table_association" "terraform-import-test-2" {
+  route_table_id = aws_route_table.terraform-import-test.id
+  subnet_id      = "subnet-0a48ca5abc44c202c"
+}
