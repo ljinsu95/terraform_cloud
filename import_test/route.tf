@@ -240,37 +240,42 @@ subnet-0a48ca5abc44c202c / rtb-079e6beb839030847
 # ]
 
 
-# # ROUTE_TABLE Import Target
-# resource "aws_route_table" "rt-tf-import" {
-#   vpc_id = "vpc-0f8af692fead0eaea"
+# ROUTE_TABLE Import Target
+# rtb-05623991dbb664c96
+resource "aws_route_table" "rt-tf-import" {
+  vpc_id = "vpc-0f8af692fead0eaea"
 
-#   tags = {
-#     "Name" = "rt-tf-import"
-#   }
-# }
+  tags = {
+    "Name" = "rt-tf-import"
+  }
+}
 
-# # ROUTE Import Target 1
-# resource "aws_route" "r-tf-import-1" {
-#   route_table_id         = aws_route_table.rt-tf-import.id
-#   destination_cidr_block = "0.0.0.0/0"
-#   gateway_id             = "igw-08dd9ebf7680a1486"
-# }
+# ROUTE Import Target 1
+# rtb-05623991dbb664c96_0.0.0.0/0
+resource "aws_route" "r-tf-import-1" {
+  route_table_id         = aws_route_table.rt-tf-import.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = "igw-08dd9ebf7680a1486"
+}
 
-# # ROUTE Import Target 2
-# resource "aws_route" "r-tf-import-2" {
-#   route_table_id         = aws_route_table.rt-tf-import.id
-#   destination_cidr_block = "172.32.0.0/24"
-#   transit_gateway_id     = "tgw-07dc79da1274746a0"
-# }
+# ROUTE Import Target 2
+# rtb-05623991dbb664c96_172.32.0.0/24
+resource "aws_route" "r-tf-import-2" {
+  route_table_id         = aws_route_table.rt-tf-import.id
+  destination_cidr_block = "172.32.0.0/24"
+  transit_gateway_id     = "tgw-07dc79da1274746a0"
+}
 
-# # ROUTE_TABLE_ASSOCIATION Import Target 1
-# resource "aws_route_table_association" "rta-tf-import-1" {
-#   route_table_id = aws_route_table.rt-tf-import.id
-#   subnet_id      = "subnet-0c47e5a32380dfac3"
-# }
+# ROUTE_TABLE_ASSOCIATION Import Target 1
+# subnet-070c807f365a9c9ed/rtb-05623991dbb664c96
+resource "aws_route_table_association" "rta-tf-import-1" {
+  route_table_id = aws_route_table.rt-tf-import.id
+  subnet_id      = "subnet-070c807f365a9c9ed"
+}
 
-# # ROUTE_TABLE_ASSOCIATION Import Target 2
-# resource "aws_route_table_association" "rta-tf-import-2" {
-#   route_table_id = aws_route_table.rt-tf-import.id
-#   subnet_id      = "subnet-0a48ca5abc44c202c"
-# }
+# ROUTE_TABLE_ASSOCIATION Import Target 2
+# subnet-052b5eae8cc4f2515/rtb-05623991dbb664c96
+resource "aws_route_table_association" "rta-tf-import-2" {
+  route_table_id = aws_route_table.rt-tf-import.id
+  subnet_id      = "subnet-052b5eae8cc4f2515"
+}
