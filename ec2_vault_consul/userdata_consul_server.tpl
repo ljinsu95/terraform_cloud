@@ -1,13 +1,13 @@
 #!/bin/bash
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-# sudo yum -y install consul-enterprise-1.15.4+ent-1.$(uname -m)
-sudo yum -y install consul-1.15.4-1.$(uname -m)
+sudo yum -y install consul-enterprise-1.15.4+ent-1.$(uname -m)
+# sudo yum -y install consul-1.15.4-1.$(uname -m)
 
 sudo tee /etc/consul.d/consul.hcl -<<EOF
 
 # datacenter
-datacenter = "dc0515"
+datacenter = "dc0912"
 
 # data_dir
 data_dir = "/opt/consul"
@@ -28,7 +28,7 @@ bind_addr = "{{ GetInterfaceIP \"eth0\" }}"
 #advertise_addr = "127.0.0.1"
 
 # Enterprise License
-# license_path = "/etc/consul.d/consul.hclic"
+license_path = "/etc/consul.d/consul.hclic"
 
 # bootstrap_expect
 bootstrap_expect=3

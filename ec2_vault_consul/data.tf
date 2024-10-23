@@ -7,13 +7,13 @@ data "aws_vpc" "selected" {
   id = data.aws_vpcs.existing.ids[0]
 }
 
-### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_groups
-data "aws_security_groups" "main" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.selected.id]
-  }
-}
+# ### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_groups
+# data "aws_security_groups" "main" {
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.selected.id]
+#   }
+# }
 
 # ## 인터넷 게이트웨이 조회
 # ### https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/internet_gateway
@@ -56,7 +56,7 @@ data "aws_ami" "amazon_linux_2" {
 
   filter {
     name   = "architecture"
-    values = ["x86_64"]
+    values = [var.architecture]
   }
 
   filter {

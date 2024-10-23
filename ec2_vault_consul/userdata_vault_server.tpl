@@ -2,8 +2,8 @@
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 sudo yum -y install vault-enterprise-1.14.8+ent-1.$(uname -m)
-# sudo yum -y install consul-enterprise-1.15.4+ent-1.$(uname -m)
-sudo yum -y install consul-1.15.4-1.$(uname -m)
+sudo yum -y install consul-enterprise-1.15.4+ent-1.$(uname -m)
+# sudo yum -y install consul-1.15.4-1.$(uname -m)
 
 sudo tee /etc/vault.d/vault.hcl -<<EOF
 # Full configuration options can be found at https://www.vaultproject.io/docs/configuration
@@ -60,7 +60,7 @@ sudo tee /etc/consul.d/consul.hcl -<<EOF
 # Fullconfiguration options can be found at https://www.consul.io/docs/agent/options.html
 
 # datacenter
-datacenter = "dc0515"
+datacenter = "dc0912"
 
 # data_dir
 data_dir = "/opt/consul"
@@ -83,7 +83,7 @@ bind_addr = "{{ GetInterfaceIP \"eth0\" }}"
 #advertise_addr = "127.0.0.1"
 
 # Enterprise License
-# license_path = "/etc/consul.d/consul.hclic"
+license_path = "/etc/consul.d/consul.hclic"
 
 # bootstrap_expect
 #bootstrap_expect=3

@@ -52,6 +52,10 @@ resource "aws_iam_role_policy" "vault_join_policy" {
           "iam:GetUser",
           "iam:ListRoles",
           "iam:GetRole",
+          # KMS 설정시...
+          # "kms:Encrypt",
+          # "kms:Decrypt",
+          # "kms:DescribeKey",
           # "sts:AssumeRole"
         ]
         Effect   = "Allow"

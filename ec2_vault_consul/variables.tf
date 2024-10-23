@@ -38,7 +38,6 @@ variable "VAULT_LICENSE" {
   type        = string
   description = "License for the Vault"
   sensitive   = true
-
 }
 
 variable "CONSUL_LICENSE" {
@@ -56,13 +55,14 @@ variable "pem_key_name" {
 
 variable "instance_type" {
   type        = string
-  default     = "t3.micro"
-  description = "x86 instance type"
+  default     = "t4g.micro"
+  # default     = "t3.micro"
+  description = "instance type"
 }
 
 variable "architecture" {
   type = string
-  # default     = "arm"
-  default     = "x86"
+  default     = "arm64"
+  # default     = "x86_64"
   description = "ec2에 사용되는 아키텍쳐 명"
 }
