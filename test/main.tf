@@ -1,5 +1,3 @@
-
-
 # VPC 조회
 data "aws_vpcs" "existing" {}
 

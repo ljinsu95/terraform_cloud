@@ -20,9 +20,10 @@ variable "AWS_SECRET_ACCESS_KEY" {
 }
 
 variable "aws_region" {
-  default     = "us-east-2"
+  # default     = "us-east-2"
   # default     = "ap-south-1"
   # default     = "ap-northeast-2"
+  default     = "ca-central-1"
   description = "aws region"
 }
 

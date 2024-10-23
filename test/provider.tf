@@ -1,5 +1,3 @@
-
-
 provider "aws" {
   ## AWS Region
   region     = var.aws_region
