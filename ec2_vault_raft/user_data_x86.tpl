@@ -9,8 +9,10 @@
 
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-sudo yum -y install vault-enterprise-1.16.3+ent-1.x86_64
+sudo yum -y install vault-enterprise-1.16.7+ent-1.x86_64
 # sudo yum -y install vault-enterprise-1.15.3+ent-1.aarch64
+
+export NI_NAME=$(ip -o link show | awk -F': ' 'NR==2 {print $2}')
 
 
 sudo tee /etc/vault.d/vault.hcl -<<EOF
@@ -20,8 +22,8 @@ ui = true
 
 #mlock = true
 disable_mlock = true
-cluster_addr  = "http://{{ GetInterfaceIP \"eth0\" }}:8201"
-api_addr      = "http://{{ GetInterfaceIP \"eth0\" }}:8200"
+cluster_addr  = "http://{{ GetInterfaceIP \"$${NI_NAME}\" }}:8201"
+api_addr      = "http://{{ GetInterfaceIP \"$${NI_NAME}\" }}:8200"
 
 #storage "file" {
 #  path = "/opt/vault/data"

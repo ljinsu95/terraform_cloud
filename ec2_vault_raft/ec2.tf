@@ -3,14 +3,11 @@
 resource "aws_instance" "vault_raft_amz2" {
   count = var.ec2_count
 
-  ami           = data.aws_ami.amazon_linux_2.id
-  instance_type = var.instance_type
-  # subnet_id     = var.subnet_ids[(tonumber(count.index) + 1) % length(var.subnet_az_list)]
-  # subnet_id = var.subnet_ids[(tonumber(count.index) + 1) % length(data.aws_availability_zones.available)]
-  subnet_id = data.aws_subnets.main.ids[(tonumber(count.index) + 1) % length(data.aws_subnets.main.ids)]
+  ami                    = data.aws_ami.amazon_linux_2.id
+  instance_type          = var.instance_type
+  subnet_id              = data.aws_subnets.main.ids[(tonumber(count.index) + 1) % length(data.aws_subnets.main.ids)]
   vpc_security_group_ids = toset([aws_security_group.vault_server.id])
-  # security_groups = data.aws_security_groups.main.ids
-  key_name        = var.pem_key_name
+  key_name               = var.pem_key_name
   tags = {
     Name    = "${var.prefix}-Vault-${count.index}"
     service = "${var.tag_name}"

@@ -5,8 +5,8 @@ variable "prefix" {
 
 variable "TFC_TOKEN" {
   type        = string
-  description = "테라폼 토큰"
   sensitive   = true
+  description = "테라폼 토큰"
 }
 
 variable "AWS_ACCESS_KEY_ID" {
@@ -37,6 +37,7 @@ variable "tag_name" {
 
 variable "VAULT_LICENSE" {
   type        = string
+  sensitive   = true
   description = "License for the Vault"
   # default    = "YOUR_DEFAULT_VALUE" # 필요한 경우 기본값 설정 
 }
