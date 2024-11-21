@@ -29,6 +29,11 @@ variable "tag_name" {
   description = "vault_auto_join을 위한 태그 명"
 }
 
+variable "vault_version" {
+  type        = string
+  default     = "1.18.1"
+  description = "Vault Version"
+}
 variable "VAULT_LICENSE" {
   type        = string
   sensitive   = true

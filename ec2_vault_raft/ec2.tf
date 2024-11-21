@@ -40,6 +40,7 @@ resource "aws_instance" "vault_raft_amz2" {
     var.architecture == "x86" ? "user_data_x86.tpl" : "user_data_arm.tpl",
     {
       TAG           = var.tag_name
+      vault_version = var.vault_version
       vault_license = var.VAULT_LICENSE
     }
   )
