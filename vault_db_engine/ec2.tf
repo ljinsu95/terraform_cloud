@@ -3,10 +3,10 @@
 resource "aws_instance" "db_client" {
   depends_on = [aws_db_instance.vault]
 
-  ami             = data.aws_ami.amazon_linux_2.id
-  instance_type   = "t3.micro"
-  subnet_id       = data.aws_subnets.common.ids[0]
-  security_groups = data.aws_security_groups.common.ids
+  ami                    = data.aws_ami.amazon_linux_2.id
+  instance_type          = "t3.micro"
+  subnet_id              = data.aws_subnets.common.ids[0]
+  vpc_security_group_ids = data.aws_security_groups.common.ids
   tags = {
     Name = "${var.prefix}-db-client"
   }
