@@ -35,7 +35,7 @@ resource "aws_instance" "db_client" {
       MYSQL_USER        = var.db_info.mysql.used ? aws_db_instance.vault["mysql"].username : ""
       MYSQL_PWD         = var.db_info.mysql.used ? aws_db_instance.vault["mysql"].password : ""
       MYSQL_HOSTNAME    = var.db_info.mysql.used ? aws_db_instance.vault["mysql"].address : ""
-      MYSQL_DBNAME      = var.db_info.mysql.used ? ws_db_instance.vault["mysql"].db_name : ""
+      MYSQL_DBNAME      = var.db_info.mysql.used ? aws_db_instance.vault["mysql"].db_name : ""
     }
   )
 }
