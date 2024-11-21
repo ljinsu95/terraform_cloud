@@ -3,12 +3,6 @@ variable "prefix" {
   description = "prefix"
 }
 
-variable "TFC_TOKEN" {
-  type        = string
-  sensitive   = true
-  description = "테라폼 토큰"
-}
-
 variable "AWS_ACCESS_KEY_ID" {
   description = "AWS ACCESS KEY"
   sensitive   = true

@@ -1,8 +1,3 @@
-# provider "tfe" {
-#   organization = "insideinfo_jinsu"
-#   token        = var.TFC_TOKEN
-# }
-
 provider "aws" {
   region     = var.aws_region
   access_key = var.AWS_ACCESS_KEY_ID

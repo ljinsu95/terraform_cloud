@@ -9,7 +9,7 @@
 
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-sudo yum -y install vault-enterprise-1.16.7+ent-1.x86_64
+sudo yum -y install vault-enterprise-1.16.7+ent-1.$(uname -m)
 # sudo yum -y install vault-enterprise-1.15.3+ent-1.aarch64
 
 export NI_NAME=$(ip -o link show | awk -F': ' 'NR==2 {print $2}')
