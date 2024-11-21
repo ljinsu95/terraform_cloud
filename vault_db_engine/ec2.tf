@@ -28,14 +28,14 @@ resource "aws_instance" "db_client" {
     {
       ENABLE_POSTGRESQL = var.db_info.postgres.used
       ENABLE_MYSQL      = var.db_info.mysql.used
-      PGUSER            = aws_db_instance.vault["postgres"].username
-      PGPASSWORD        = aws_db_instance.vault["postgres"].password
-      PGHOSTNAME        = aws_db_instance.vault["postgres"].address
-      PGDBNAME          = aws_db_instance.vault["postgres"].db_name
-      MYSQL_USER        = aws_db_instance.vault["mysql"].username
-      MYSQL_PWD         = aws_db_instance.vault["mysql"].password
-      MYSQL_HOSTNAME    = aws_db_instance.vault["mysql"].address
-      MYSQL_DBNAME      = aws_db_instance.vault["mysql"].db_name
+      PGUSER            = var.db_info.postgres.used ? aws_db_instance.vault["postgres"].username : ""
+      PGPASSWORD        = var.db_info.postgres.used ? aws_db_instance.vault["postgres"].password : ""
+      PGHOSTNAME        = var.db_info.postgres.used ? aws_db_instance.vault["postgres"].address : ""
+      PGDBNAME          = var.db_info.postgres.used ? aws_db_instance.vault["postgres"].db_name : ""
+      MYSQL_USER        = var.db_info.mysql.used ? aws_db_instance.vault["mysql"].username : ""
+      MYSQL_PWD         = var.db_info.mysql.used ? aws_db_instance.vault["mysql"].password : ""
+      MYSQL_HOSTNAME    = var.db_info.mysql.used ? aws_db_instance.vault["mysql"].address : ""
+      MYSQL_DBNAME      = var.db_info.mysql.used ? ws_db_instance.vault["mysql"].db_name : ""
     }
   )
 }
