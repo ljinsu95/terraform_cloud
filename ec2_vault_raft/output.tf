@@ -3,7 +3,7 @@ output "vault_public_ip" {
 }
 
 output "ami" {
-  value = data.aws_ami.amazon_linux_2.name
+  value = data.aws_ami.amazon_linux_2023
 }
 
 output "vault_raft_amz2" {
