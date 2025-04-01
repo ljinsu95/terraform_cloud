@@ -36,9 +36,10 @@ alter user vault_admin WITH CREATEROLE;
 EOF
 
     # postgresql sql문 실행
-    psql -h $PGHOSTNAME -U $PGUSER -d $PGDBNAME -f /tmp/postgresql.sql
+    PGPASSWORD=$PGPASSWORD psql -h $PGHOSTNAME -U $PGUSER -d $PGDBNAME -f /tmp/postgresql.sql
+fi
 
-elif [ "ENABLE_MYSQL" = "true" ]; then
+if [ "$ENABLE_MYSQL" = "true" ]; then
     # mysql 설치
     sudo yum install -y mysql
 
@@ -52,9 +53,9 @@ EOF
 
 
     # mysql sql문 실행
-    mysql -h $MYSQL_HOSTNAME -u $MYSQL_USER -p $MYSQL_DBNAME -e "source /tmp/mysql.sql"
+    mysql -h $MYSQL_HOSTNAME -u $MYSQL_USER -p$MYSQL_PWD -e "source /tmp/mysql.sql"
 
-else
-    # 모든 조건이 거짓일 때 실행될 명령어
-    echo "Neither PostgreSQL nor MySQL is enabled."
 fi
+
+# 모든 조건이 거짓일 때 실행될 명령어
+# echo "Neither PostgreSQL nor MySQL is enabled."
