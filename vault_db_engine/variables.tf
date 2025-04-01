@@ -1,5 +1,5 @@
 variable "prefix" {
-  default = "jinsu"
+  default = "tf-pc"
 }
 
 variable "AWS_ACCESS_KEY_ID" {
@@ -19,6 +19,12 @@ variable "aws_region" {
   # default = "ap-northeast-2"
   default     = "ca-central-1"
   description = "aws region"
+}
+
+variable "pem_key_name" {
+  type        = string
+  default     = "jinsu"
+  description = "ec2에 사용되는 pem key 명"
 }
 
 variable "VAULT_ADDR" {
@@ -52,15 +58,15 @@ variable "db_info" {
   ))
   default = {
     postgres = {
-      used           = true
+      used           = false
       engine         = "postgres"
-      engine_version = "15.6"
+      engine_version = "15.7"
       db_name        = "postgres"
       username       = "postgres"
       password       = "pa$$w0rd"
     },
     mysql = {
-      used           = false
+      used           = true
       engine         = "mysql"
       engine_version = "8.0.35"
       db_name        = ""
