@@ -7,6 +7,7 @@ resource "aws_instance" "db_client" {
   instance_type          = "t3.micro"
   subnet_id              = data.aws_subnets.common.ids[0]
   vpc_security_group_ids = toset([aws_security_group.all.id])
+  key_name               = var.pem_key_name
   tags = {
     Name = "${var.prefix}-db-client"
   }
