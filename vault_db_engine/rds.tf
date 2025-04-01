@@ -28,7 +28,8 @@ resource "aws_db_instance" "vault" {
   password = each.value.password
 
   instance_class         = "db.t3.micro" # RDS 인스턴스의 인스턴스 유형
-  allocated_storage      = 10
+  storage_type           = "gp3"
+  allocated_storage      = 20
   availability_zone      = data.aws_availability_zones.available.names[0]
   multi_az               = false # 다중 AZ 여부
   db_subnet_group_name   = aws_db_subnet_group.vault.name
