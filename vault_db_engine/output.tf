@@ -37,9 +37,10 @@ output "db_endpoint3" {
   # value = { for s in data.aws_db_instances.example : s.identifier => s.cidr_block }
 }
 
-# output "aws_db_instance" {
-#   value = aws_db_instance.vault[*].identifier
-# }
+output "db_client_public_ip" {
+  description = "RDS에 접근하기위한 Database Client 서버의 Public IP"
+  value = aws_instance.db_client.public_ip
+}
 
 output "name" {
   value = aws_instance.db_client.instance_state
