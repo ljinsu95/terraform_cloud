@@ -1,8 +1,8 @@
 #!/bin/bash
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-sudo yum -y install vault-enterprise-1.14.8+ent-1.$(uname -m)
-sudo yum -y install consul-enterprise-1.15.4+ent-1.$(uname -m)
+sudo yum -y install vault-enterprise-1.16.7+ent-1.$(uname -m)
+sudo yum -y install consul-enterprise-1.17.6+ent-1.$(uname -m)
 # sudo yum -y install consul-1.15.4-1.$(uname -m)
 
 sudo tee /etc/vault.d/vault.hcl -<<EOF
@@ -43,10 +43,10 @@ license_path = "/etc/vault.d/vault.hclic"
 #disable_performance_standby = false
 
 # Example AWS KMS auto unseal
-# seal "awskms" {
-#   region = "ca-central-1"
-#   kms_key_id = ""
-# }
+seal "awskms" {
+  region = "ca-central-1"
+  kms_key_id = "${aws_kms_id}"
+}
 
 # reporting disable
 reporting {

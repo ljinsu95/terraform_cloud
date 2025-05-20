@@ -13,13 +13,17 @@ variable "AWS_SECRET_ACCESS_KEY" {
   sensitive   = true
 }
 
+variable "AWS_KMS_KEY" {
+  sensitive = true
+}
+
 variable "aws_region" {
   default     = "ca-central-1"
   description = "aws region"
 }
 
 variable "ec2_vault_count" {
-  default     = 1
+  default     = 3
   description = "EC2 vault 갯수 설정"
 }
 

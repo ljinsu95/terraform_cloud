@@ -32,7 +32,8 @@ resource "aws_instance" "vault_consul_amz2" {
       tag_key        = "service",
       tag_value      = var.tag_name,
       vault_license  = var.VAULT_LICENSE,
-      consul_license = var.CONSUL_LICENSE
+      consul_license = var.CONSUL_LICENSE,
+      aws_kms_id     = var.AWS_KMS_KEY
     }
   )
 

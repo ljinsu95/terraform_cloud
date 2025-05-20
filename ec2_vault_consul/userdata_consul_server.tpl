@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-sudo yum -y install consul-enterprise-1.15.4+ent-1.$(uname -m)
+sudo yum -y install consul-enterprise-1.17.6+ent-1.$(uname -m)
 # sudo yum -y install consul-1.15.4-1.$(uname -m)
 
 sudo tee /etc/consul.d/consul.hcl -<<EOF
