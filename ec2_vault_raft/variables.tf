@@ -1,5 +1,5 @@
 variable "prefix" {
-  default     = "terraform_jinsu"
+  default     = "tf_js_local"
   description = "prefix"
 }
 

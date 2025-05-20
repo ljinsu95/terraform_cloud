@@ -43,9 +43,9 @@ resource "aws_instance" "vault_raft_amz2" {
       vault_license = var.VAULT_LICENSE
   })
 
-  # lifecycle {
-  #     ignore_changes = [ user_data ]
-  # }
+  lifecycle {
+      ignore_changes = [ ami ]
+  }
 }
 
 # # tls_private_key https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key.html
